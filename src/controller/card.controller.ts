@@ -51,10 +51,32 @@ export class CardController {
         }
     }
 
+    async putCard(req: Request, res: Response) {
+        try {
+            const card = await Card.findByPk(req.params.id);
+            if (card === null) {
+                return res.status(400).send({
+                    response: false,
+                });
+            }
+            const newCard = await card.update(req.body);
+
+            return res.status(200).send({
+                response: newCard,
+            });
+        } catch (e) {
+            return res.status(400).send({
+                response: false,
+                message: e.message,
+            });
+        }
+    }
+
     buildRoutes(): Router {
         const router = express.Router();
         router.get('/:id', express.json(), this.getAllCards.bind(this));
         router.post('/', express.json(), this.createCard.bind(this));
+        router.put('/:id', express.json(), this.putCard.bind(this));
         router.delete('/:id', express.json(), this.deleteCard.bind(this));
         return router;
     }

@@ -33,7 +33,7 @@ export class WishController {
             if (wish === null) {
                 newWish = await Wish.create(req.body);
             } else {
-                newWish = await Wish.update(req.body);
+                newWish = await wish.update(req.body);
             }
             return res.status(200).send({
                 response: newWish,
