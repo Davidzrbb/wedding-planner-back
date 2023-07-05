@@ -4,6 +4,8 @@ import http from "http";
 import sequelize from "./utils/mysql.connector";
 import cors from "cors";
 import {CategoryController} from "./controller/category.controller";
+import {CardController} from "./controller/card.controller";
+import {WishController} from "./controller/wish.controller";
 
 config();
 
@@ -25,6 +27,12 @@ async function startServer(): Promise<void> {
     //controllers
     const categoryController = new CategoryController();
     app.use('/category', categoryController.buildRoutes());
+
+    const cardController = new CardController();
+    app.use('/card', cardController.buildRoutes());
+
+    const wishController = new WishController();
+    app.use('/wish', wishController.buildRoutes());
 
     httpServer.listen(port, () => console.log(`Listening on port ${port}`));
 }

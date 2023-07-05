@@ -4,6 +4,7 @@ import sequelize from '../utils/mysql.connector';
 export interface WishProps {
     id?: number,
     text?: string,
+    fk_category?: number,
 }
 
 export const Wish = sequelize.define('wish', {
@@ -12,8 +13,11 @@ export const Wish = sequelize.define('wish', {
         autoIncrement: true,
         primaryKey: true,
     },
-    name: {
+    text: {
         type: new DataTypes.TEXT()
     },
+    fk_category: {
+        type: DataTypes.INTEGER,
+    }
 });
 

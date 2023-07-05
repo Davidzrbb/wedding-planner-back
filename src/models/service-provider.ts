@@ -6,6 +6,7 @@ export interface ServiceProviderProps {
     name?: string,
     price?: number,
     contact?: string,
+    fk_category?: number,
 }
 
 export const ServiceProvider = sequelize.define('serviceprovider', {
@@ -22,6 +23,9 @@ export const ServiceProvider = sequelize.define('serviceprovider', {
     },
     contact: {
         type: DataTypes.STRING(128),
+    },
+    fk_category: {
+        type: DataTypes.INTEGER,
     }
 });
 

@@ -5,6 +5,7 @@ export interface CardProps {
     id?: number,
     name?: string,
     state?: boolean,
+    fk_category?: number,
 }
 
 export const Card = sequelize.define('card', {
@@ -18,6 +19,9 @@ export const Card = sequelize.define('card', {
     },
     state: {
         type: DataTypes.BOOLEAN,
+    },
+    fk_category: {
+        type: DataTypes.INTEGER,
     }
 });
 
