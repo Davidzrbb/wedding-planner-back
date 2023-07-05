@@ -19,13 +19,13 @@ export const ServiceProvider = sequelize.define('serviceprovider', {
         type: new DataTypes.STRING(128),
     },
     price: {
-        type: new DataTypes.NUMBER(),
+        type: new DataTypes.INTEGER(),
     },
     contact: {
         type: DataTypes.STRING(128),
     },
     fk_category: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER(),
     }
 });
 

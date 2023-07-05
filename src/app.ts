@@ -6,6 +6,7 @@ import cors from "cors";
 import {CategoryController} from "./controller/category.controller";
 import {CardController} from "./controller/card.controller";
 import {WishController} from "./controller/wish.controller";
+import {ServiceProviderController} from "./controller/service-provider.controller";
 
 config();
 
@@ -33,6 +34,9 @@ async function startServer(): Promise<void> {
 
     const wishController = new WishController();
     app.use('/wish', wishController.buildRoutes());
+
+    const serviceProviderController = new ServiceProviderController();
+    app.use('/service-provider', serviceProviderController.buildRoutes());
 
     httpServer.listen(port, () => console.log(`Listening on port ${port}`));
 }
