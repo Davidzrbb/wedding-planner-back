@@ -1,18 +1,19 @@
 import {config} from "dotenv";
 import express from "express";
 import http from "http";
-
+import sequelize from "./utils/mysql.connector";
 import cors from "cors";
+import {CategoryController} from "./controller/category.controller";
 
 config();
 
 async function startServer(): Promise<void> {
 
-    const db = require('./utils/mysql.connector');
-    db.authenticate()
-        .then(() => {
-            console.log('Connection has been established successfully.');
-        }).catch((err: any) => {
+    sequelize.authenticate()
+        .then(async () => {
+            await sequelize.sync({alter: true});
+            console.log("All models were synchronized successfully.");
+        }).catch((err) => {
         console.error('Unable to connect to the database:', err);
     });
     const port = process.env.PORT || 3000;
@@ -20,6 +21,10 @@ async function startServer(): Promise<void> {
     const httpServer = http.createServer(app);
     app.use(cors({origin: process.env.FRONT_URL}));
 
+
+    //controllers
+    const categoryController = new CategoryController();
+    app.use('/category', categoryController.buildRoutes());
 
     httpServer.listen(port, () => console.log(`Listening on port ${port}`));
 }

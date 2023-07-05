@@ -1,0 +1,23 @@
+import {DataTypes} from 'sequelize';
+import sequelize from '../utils/mysql.connector';
+
+export interface CardProps {
+    id?: number,
+    name?: string,
+    state?: boolean,
+}
+
+export const Card = sequelize.define('card', {
+    id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+    },
+    name: {
+        type: new DataTypes.STRING(128),
+    },
+    state: {
+        type: DataTypes.BOOLEAN,
+    }
+});
+
