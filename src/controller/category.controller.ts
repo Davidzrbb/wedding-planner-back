@@ -56,7 +56,6 @@ export class CategoryController {
                 });
             }
             const newCategory = await category.update(req.body);
-
             return res.status(200).send({
                 response: newCategory,
             });

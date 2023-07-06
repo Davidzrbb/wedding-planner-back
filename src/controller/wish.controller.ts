@@ -29,6 +29,7 @@ export class WishController {
                     }
                 }
             )
+            console.log(wish)
             let newWish;
             if (wish === null) {
                 newWish = await Wish.create(req.body);

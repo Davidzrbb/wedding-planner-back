@@ -7,6 +7,7 @@ import {CategoryController} from "./controller/category.controller";
 import {CardController} from "./controller/card.controller";
 import {WishController} from "./controller/wish.controller";
 import {ServiceProviderController} from "./controller/service-provider.controller";
+import {ConnexionController} from "./controller/connexion.controller";
 
 config();
 
@@ -37,6 +38,9 @@ async function startServer(): Promise<void> {
 
     const serviceProviderController = new ServiceProviderController();
     app.use('/service-provider', serviceProviderController.buildRoutes());
+
+    const connexionController = new ConnexionController();
+    app.use('/auth', connexionController.buildRoutes());
 
     httpServer.listen(port, () => console.log(`Listening on port ${port}`));
 }
