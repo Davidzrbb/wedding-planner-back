@@ -12,7 +12,7 @@ export class WishController {
             res.status(200).send({
                 response: wish,
             });
-        } catch (e) {
+        } catch (e : any) {
             res.status(400).send({
                 response: false,
                 message: e.message,
@@ -39,7 +39,7 @@ export class WishController {
             return res.status(200).send({
                 response: newWish,
             });
-        } catch (e) {
+        } catch (e : any) {
             return res.status(400).send({
                 response: false,
                 message: e.message,

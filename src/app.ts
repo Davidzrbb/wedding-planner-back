@@ -17,7 +17,7 @@ async function startServer(): Promise<void> {
         .then(async () => {
             await sequelize.sync({alter: true});
             console.log("All models were synchronized successfully.");
-        }).catch((err) => {
+        }).catch((err: any) => {
         console.error('Unable to connect to the database:', err);
     });
     const port = process.env.PORT || 3000;

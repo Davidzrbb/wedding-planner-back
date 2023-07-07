@@ -12,7 +12,7 @@ export class ServiceProviderController {
             res.status(200).send({
                 response: category,
             });
-        } catch (e) {
+        } catch (e: any) {
             res.status(400).send({
                 response: false,
                 message: e.message,
@@ -26,7 +26,7 @@ export class ServiceProviderController {
             res.status(201).send({
                 response: category,
             });
-        } catch (e) {
+        } catch (e: any) {
             res.status(400).send({
                 response: false,
                 message: e.message,
@@ -43,7 +43,7 @@ export class ServiceProviderController {
             res.status(200).send({
                 response: true,
             });
-        } catch (e) {
+        } catch (e: any) {
             res.status(400).send({
                 response: false,
                 message: e.message,

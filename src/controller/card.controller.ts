@@ -12,7 +12,7 @@ export class CardController {
             res.status(200).send({
                 response: card,
             });
-        } catch (e) {
+        } catch (e: any) {
             res.status(400).send({
                 response: false,
                 message: e.message,
@@ -26,7 +26,7 @@ export class CardController {
             res.status(201).send({
                 response: card,
             });
-        } catch (e) {
+        } catch (e: any) {
             res.status(400).send({
                 response: false,
                 message: e.message,
@@ -43,7 +43,7 @@ export class CardController {
             res.status(200).send({
                 response: true,
             });
-        } catch (e) {
+        } catch (e: any) {
             res.status(400).send({
                 response: false,
                 message: e.message,
@@ -64,7 +64,7 @@ export class CardController {
             return res.status(200).send({
                 response: newCard,
             });
-        } catch (e) {
+        } catch (e: any) {
             return res.status(400).send({
                 response: false,
                 message: e.message,

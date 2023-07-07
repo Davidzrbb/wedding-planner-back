@@ -1,5 +1,9 @@
 import express, {Request, Response, Router} from "express";
-import {CategoryProps, Category} from "../models/category";
+import {Category} from "../models/category";
+import {ServiceProvider} from "../models/service-provider";
+import {Card} from "../models/card";
+import {Wish} from "../models/wish";
+
 
 export class CategoryController {
     async getAllCategories(req: Request, res: Response) {
@@ -8,7 +12,7 @@ export class CategoryController {
             res.status(200).send({
                 response: category,
             });
-        } catch (e) {
+        } catch (e: any) {
             res.status(400).send({
                 response: false,
                 message: e.message,
@@ -22,7 +26,7 @@ export class CategoryController {
             res.status(201).send({
                 response: category,
             });
-        } catch (e) {
+        } catch (e: any) {
             res.status(400).send({
                 response: false,
                 message: e.message,
@@ -32,14 +36,25 @@ export class CategoryController {
 
     async deleteCategory(req: Request, res: Response) {
         try {
-            const category = await Category.findByPk(req.params.id);
+            const categoryId = req.params.id;
+
+            const category = await Category.findByPk(categoryId);
+            // Destroy category
             if (category !== null) {
                 await category.destroy();
+
+                // Destroy all service providers, cards, and wishes with this fk_category
+                await Promise.all([
+                    ServiceProvider.destroy({ where: { fk_category: categoryId } }),
+                    Card.destroy({ where: { fk_category: categoryId } }),
+                    Wish.destroy({ where: { fk_category: categoryId } })
+                ]);
             }
+
             res.status(200).send({
                 response: true,
             });
-        } catch (e) {
+        } catch (e: any) {
             res.status(400).send({
                 response: false,
                 message: e.message,
@@ -59,7 +74,7 @@ export class CategoryController {
             return res.status(200).send({
                 response: newCategory,
             });
-        } catch (e) {
+        } catch (e: any) {
             return res.status(400).send({
                 response: false,
                 message: e.message,
@@ -68,7 +83,9 @@ export class CategoryController {
     }
 
 
-    buildRoutes(): Router {
+    buildRoutes()
+        :
+        Router {
         const router = express.Router();
         router.get('/', express.json(), this.getAllCategories.bind(this));
         router.post('/', express.json(), this.createCategory.bind(this));

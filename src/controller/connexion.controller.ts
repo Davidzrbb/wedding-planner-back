@@ -18,7 +18,7 @@ export class ConnexionController {
             return res.status(200).send({
                 response: true,
             });
-        } catch (e) {
+        } catch (e: any) {
             res.status(400).send({
                 response: false,
                 message: e.message,
@@ -42,7 +42,7 @@ export class ConnexionController {
             return res.status(200).send({
                 response: connexion.token,
             });
-        } catch (e) {
+        } catch (e: any) {
             res.status(400).send({
                 response: false,
                 message: e.message,
@@ -59,7 +59,7 @@ export class ConnexionController {
             res.status(201).send({
                 response: connexion.token,
             });
-        } catch (e) {
+        } catch (e: any) {
             res.status(400).send({
                 response: false,
                 message: e.message,
